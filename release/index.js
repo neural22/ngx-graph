@@ -74964,7 +74964,7 @@ var graph_component_GraphComponent = /** @class */ (function (_super) {
     __decorate([
         Object(core_["HostListener"])('document:touchmove', ['$event']),
         __metadata("design:type", Function),
-        __metadata("design:paramtypes", [TouchEvent]),
+        __metadata("design:paramtypes", [any]),
         __metadata("design:returntype", void 0)
     ], GraphComponent.prototype, "onTouchMove", null);
     __decorate([
