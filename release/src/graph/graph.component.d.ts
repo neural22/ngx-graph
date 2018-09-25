@@ -312,7 +312,7 @@ export declare class GraphComponent extends BaseChartComponent implements OnInit
      *
      * @memberOf GraphComponent
      */
-    onTouchStart(event: any): void;
+    onTouchStart(event: MouseEvent): void;
     /**
      * On touch move event, used for panning.
      *
@@ -320,7 +320,7 @@ export declare class GraphComponent extends BaseChartComponent implements OnInit
      *
      * @memberOf GraphComponent
      */
-    onTouchMove($event: any): void;
+    onTouchMove($event: MouseEvent): void;
     /**
      * On touch end event to disable panning.
      *
@@ -328,7 +328,7 @@ export declare class GraphComponent extends BaseChartComponent implements OnInit
      *
      * @memberOf GraphComponent
      */
-    onTouchEnd(event: any): void;
+    onTouchEnd(event: MouseEvent): void;
     /**
      * On mouse up event to disable panning/dragging.
      *
