@@ -91,7 +91,7 @@ export interface Matrix {
     </svg:g>
     <svg:g class="nodes">
       <svg:g #nodeElement *ngFor="let node of graph.nodes; trackBy: trackNodeBy" class="node-group" [id]="node.id" [attr.transform]="node.transform"
-        (click)="onClick(node)" (mousedown)="onNodeMouseDown($event, node)">
+        (mousedown)="onNodeMouseDown($event, node)">
         <ng-template *ngIf="nodeTemplate" [ngTemplateOutlet]="nodeTemplate" [ngTemplateOutletContext]="{ $implicit: node }">
         </ng-template>
         <svg:circle *ngIf="!nodeTemplate" r="10" [attr.cx]="node.dimension.width / 2" [attr.cy]="node.dimension.height / 2" [attr.fill]="node.data?.color"
@@ -956,6 +956,9 @@ export class GraphComponent extends BaseChartComponent implements OnInit, OnChan
    */
   @HostListener('document:mouseup')
   onMouseUp(event: MouseEvent): void {
+    if (!this.isDragging) {
+      this.onClick(event);
+    }
     this.isDragging = false;
     this.isPanning = false;
     if (this.layout && typeof this.layout !== 'string' && this.layout.onDragEnd) {
