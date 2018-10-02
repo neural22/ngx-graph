@@ -171,6 +171,7 @@ export class GraphComponent extends BaseChartComponent implements OnInit, OnChan
   transformationMatrix: Matrix = identity();
   _touchLastX = null;
   _touchLastY = null;
+  _dragging = false;
 
   constructor(
     private el: ElementRef,
@@ -425,7 +426,7 @@ export class GraphComponent extends BaseChartComponent implements OnInit, OnChan
       this.calcDominantBaseline(newLink);
       newLinks.push(newLink);
     }
-    
+
     this.graph.edges = newLinks;
 
     // Map the old links for animations
@@ -729,6 +730,7 @@ export class GraphComponent extends BaseChartComponent implements OnInit, OnChan
     if (!this.draggingEnabled) {
       return;
     }
+    this._dragging = true;
     const node = this.draggingNode;
     if (this.layout && typeof this.layout !== 'string' && this.layout.onDrag) {
       this.layout.onDrag(node, event);
@@ -956,9 +958,10 @@ export class GraphComponent extends BaseChartComponent implements OnInit, OnChan
    */
   @HostListener('document:mouseup')
   onMouseUp(event: MouseEvent): void {
-    if (!this.isDragging) {
+    if (!this._dragging) {
       this.onClick(this.draggingNode);
     }
+    this._dragging = false;
     this.isDragging = false;
     this.isPanning = false;
     if (this.layout && typeof this.layout !== 'string' && this.layout.onDragEnd) {
